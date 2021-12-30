@@ -1,0 +1,8 @@
+{
+  "name": "NFR",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular",
+  "id": "1d5cb8d2"
+}
