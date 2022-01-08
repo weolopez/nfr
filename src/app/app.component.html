@@ -6,10 +6,20 @@
           <ion-list-header>Inbox</ion-list-header>
           <ion-note>hi@ionicframework.com</ion-note>
 
+    <div *ngIf="auth.user | async as userO; else showLogin">
+      <h1>Hello {{ user.displayName }}!</h1>
+      <button (click)="logout()">Logout</button>
+    </div>
+    <ng-template #showLogin>
+      <p>Please login {{loggedIn}} {{user.displayName}}</p>
+      <button (click)="loginWithGoogle()">Login with Google</button>
+    </ng-template>
+
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" [routerLink]="[p.url]" lines="none" detail="false" routerLinkActive="selected">
               <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
-              <ion-label>{{ p.title }}</ion-label>
+              <ion-label *ngIf="loggedIn">Logged In{{ p.title }}</ion-label>
+              <ion-label *ngIf="!loggedIn" (click)="auth.googleSignIn()">Not Logged In{{ p.title }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
