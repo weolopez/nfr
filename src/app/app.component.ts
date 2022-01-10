@@ -1,12 +1,9 @@
 import { Component, OnDestroy, OnInit, Optional } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/compat/auth';
-// import { AuthService } from './services/auth.service';
-// import { ChatService } from './services/chat.service';
 
-import { Auth, authState, GoogleAuthProvider, signInAnonymously, signInWithPopup, signOut, User } from '@angular/fire/auth';
+import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { EMPTY, Observable, Subscription } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { AuthService } from './services/auth.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -19,7 +16,7 @@ export class AppComponent implements OnInit, OnDestroy {
     { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
     { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
     { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+    { title: 'Seasons', url: '/folder/Seasons', icon: 'warning' },
   ];
   public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
@@ -33,7 +30,9 @@ export class AppComponent implements OnInit, OnDestroy {
     showLoginButton = false;
     showLogoutButton = false;
   
-    constructor(@Optional() private auth: Auth, private router: Router) {
+    constructor(@Optional() private auth: Auth
+    , private router: Router
+    , authService: AuthService) {
       if (auth) {
         this.userO = authState(this.auth);
         this.userDisposable = authState(this.auth).subscribe(u => {

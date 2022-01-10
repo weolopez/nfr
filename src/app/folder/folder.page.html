@@ -14,8 +14,30 @@
     </ion-toolbar>
   </ion-header>
 
-  <div id="container">
-    <strong class="capitalize">{{ folder }}</strong>
-    <p>Explore <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
-  </div>
+  <!-- <div id="container">
+    <pre>{{selectedData}}</pre>
+  </div> -->
+  <ion-list>
+    <div *ngFor="let season of seasonsO | async ">
+
+      <ion-item>
+        <ion-label>{{ season.id }}</ion-label>
+        <ion-icon (click)="season.selected=!season.selected" slot="start" name="football-outline"></ion-icon>
+        <ion-icon slot="end" name="add" (click)="addSeason(season.id)"></ion-icon>
+      </ion-item>
+      <ion-list *ngIf="season.selected">
+        <ion-item *ngFor="let member of season.members">
+          <ion-label>{{ getMember(member).displayName }}</ion-label>
+          <ion-icon slot="start" name="person-circle"></ion-icon>
+          <ion-icon slot="end" name="remove" (click)="addMember(member)"></ion-icon>
+        </ion-item>
+        <ion-item *ngFor="let user of usersArray ">
+          <ion-label>{{ getNonMember(member).displayName }}</ion-label>
+          <ion-icon slot="start" name="person-circle"></ion-icon>
+          <ion-icon slot="end" name="add" (click)="addMember(member)"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </ion-list>
 </ion-content>

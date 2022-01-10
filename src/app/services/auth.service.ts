@@ -1,16 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Auth, authState, signInAnonymously, 
-  signOut, User, GoogleAuthProvider,
-  signInWithPopup } from '@angular/fire/auth';
+import { Auth, authState, GoogleAuthProvider, signInWithPopup, signOut, User } from '@angular/fire/auth';
 
-// import { auth } from 'firebase/app';
-// import { AngularFireAuth } from '@angular/fire/auth';
-// import {
-//   AngularFirestore,
-//   AngularFirestoreDocument
-// } from '@angular/fire/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 
 import { Observable, of } from 'rxjs';
 import { switchMap, first, map, tap } from 'rxjs/operators';
@@ -18,6 +11,8 @@ import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
+  static users: any;
+  static usersArray: any;
 
   switchUser(id: any) {
     this.manualUserId = id;
@@ -36,6 +31,12 @@ export class AuthService {
     private afs: AngularFirestore,
     private router: Router
   ) {
+    afs.collection('users').valueChanges().subscribe( (u:any)=>{
+      u.forEach( (user:any)=>{
+        AuthService.users[user.id] = user
+      })
+      AuthService.usersArray = u
+    })
 
     this.user$ = authState(this.afAuth).pipe(
       switchMap(user => {
