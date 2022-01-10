@@ -1,0 +1,19 @@
+<main>
+  <div *ngIf="items | async as game">
+    <h1>Games</h1>
+
+    <div *ngFor="let g of game">
+      <h3>{{g.date}}</h3>
+      <!-- <div fxLayout="row" *ngIf="g.home | fire | async as home"> 
+          <img class="avatar" [src]="home.image">
+          <h4 class="team-name"> {{ home.name }} </h4>
+      </div> -->
+      {{g.away | json }}
+      <div fxLayout="row" *ngIf="g.away | fire | async as away"> 
+          <img class="avatar" [src]="away.images[0]">
+          <h4 class="team-name"> {{ away.name }} </h4>
+      </div>
+    </div>
+
+  </div>
+</main>

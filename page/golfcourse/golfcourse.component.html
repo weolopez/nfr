@@ -1,0 +1,28 @@
+
+<main>
+  <section *ngIf="!golfround" class=" golf_round flexcontainer">
+    <article class="hole">
+      <div class="container" id="snap-scroll-container">
+        <div class="child" *ngFor="let golfcourse of golfcourses | async">
+          <div class="golf_course_id">{{golfcourse.id}}</div>
+          <div class="golf_round_members_label">
+            <input #roundName class="golf_round_members_label" type="text" maxlength="12">
+          </div>
+          <div class="golf_round_members_label">Par: {{getPar(golfcourse)}}</div>
+          <div id="go" (click)="newRound(golfcourse, roundName.value)">New</div>
+        </div>
+      </div>
+    </article>
+    <article *ngIf="true" class="hole">
+
+      <div *ngIf="true" class="container" >
+        <iframe [src]="getUrl(map)"></iframe>
+
+        <!-- <app-webcam *ngIf="!currentHoleMap"  (urlChange)="changeURL($event, currentRound)" 
+        urlImage="{{ (currentRound.holes[this.currentHole].image) ? currentRound.holes[this.currentHole].image : 'http://via.placeholder.com/640x360'}}"></app-webcam> -->
+        <!-- [src]="getUrl(currentRound.holes[this.currentHole].map)"></iframe> -->
+      </div>
+
+    </article>
+  </section>
+</main>

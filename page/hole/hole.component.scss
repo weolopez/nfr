@@ -1,0 +1,265 @@
+
+#snap {
+    background: #80000A;
+    color: #A19060;
+}
+
+.golf_round {
+  height: 100vh;
+  width: 100vw;
+}
+
+
+    //TODO REMOVE SLIDER
+.slider {
+
+  font-family: sans-serif;
+  height: 100vh;
+  scroll-snap-type: x mandatory;  
+  display: flex;
+  -webkit-overflow-scrolling: touch;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+.hslide {
+  min-width: 100vw;
+  // height: 100vh;
+  scroll-snap-align: start;
+}
+
+
+.hole {
+  order: 0;
+  flex: 1 0 auto;
+  align-self: stretch;
+  min-width: 50%;
+  // height: 100vh;
+  @media screen and (orientation:portrait) {
+    max-height: 50vh;
+  }
+}
+#holeNumber {
+  background: #80000A;
+  border-radius: 50%;
+  color: #A19060;
+  font-size: 150px;
+  margin: 0 auto;
+  object-fit: cover;
+  // padding: 15px 0;
+  text-align: center;
+  width: 200px;
+}
+.flexcontainer {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-content: top;
+  align-items: center;
+}
+.par {
+  background: black;
+  border-radius: 50%;
+  color: #80000A;
+  font-size: 75px;
+  margin: 10px;
+  object-fit: cover;
+  padding: 5px 0;
+  text-align: center;
+  width: 100px;
+}
+.score {
+  background:black;
+  border-radius: 50%;
+  color: #A19060;
+  font-size: 75px;
+  margin: 10px;
+  object-fit: cover;
+  padding: 5px 0;
+  text-align: center;
+  width: 100px;
+}
+
+
+#showusers {
+  background: black;
+  float: right;
+  margin: 0;
+  padding: 10px;
+}
+
+
+    //TODO REMOVE SEATS
+#showseats {
+  background: #80000A;
+  float: right;
+  margin: 0;
+  padding: 10px;
+}
+
+#showstars {
+  background: #A19060;
+  float: left;
+  margin: 0;
+  padding: 10px;
+}
+#seatlist {
+  background: #80000A;
+  list-style: none;
+  margin: 0;
+  padding: 15px;
+  width: 80%;
+}
+#starlist {
+  list-style: none;
+  background: #A19060;
+  margin: 0;
+  padding: 15px;
+  width: 80%;
+}
+
+
+    //TODO REMOVE USER
+#userlist {
+  list-style: none;
+  overflow-y: scroll;
+  justify-content: space-around;
+  align-content: stretch;
+  align-items: center;
+
+  height: 97vh;
+  @media screen and (orientation:portrait) {
+    max-height: 62vh;
+  }
+}
+.listitem {
+  height: 75px;
+  margin-bottom: 10px;
+}
+
+
+
+.userscore {
+  background: #A19060;
+  border-radius: 50%;
+  color: black;
+  font-size: 50px;
+  margin: 10px;
+  object-fit: cover;
+  padding: 5px 0;
+  text-align: center;
+  width: 75px;
+}
+.userscorehole {
+  background: #A19060;
+  border-radius: 50%;
+  color: #80000A;
+  font-size: 50px;
+  margin: 10px;
+  object-fit: cover;
+  padding: 5px 0;
+  text-align: center;
+  width: 75px;
+}
+
+
+    //TODO REMOVE MAP
+iframe {
+  width: 100%;
+  height: 100vh;
+}
+
+
+    //TODO REMOVE SLIDER
+article {
+  margin-top: 10px;
+  width: 50vw;
+}
+@media screen and (orientation:landscape) {
+#hole {
+  transform: translateY(-30px);
+}
+}
+@media screen and (orientation:portrait) {
+  article {
+    width: 100vw;
+  }
+}
+
+.container {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  -webkit-overflow-scrolling: touch;
+}
+
+#snap-scroll-container {
+  -webkit-scroll-snap-type: mandatory;
+  scroll-snap-type: x mandatory;
+  -webkit-scroll-snap-points-x: repeat(100%);
+  scroll-snap-points-x: repeat(100%);
+}
+#snap-scroll-container > .child {
+  scroll-snap-align: start;
+}
+
+#snap-scroll-container-coordinates {
+  -webkit-scroll-snap-type: mandatory;
+  scroll-snap-type: x mandatory;
+}
+#snap-scroll-container-coordinates > .child {
+  -webkit-scroll-snap-coordinate: 0% 0%;
+  scroll-snap-coordinate: 0% 0%;
+  scroll-snap-align: start;
+}
+.child {
+  position: relative;
+  display: inline-block;
+  // margin-right: -4px;
+  -webkit-scroll-snap-coordinate: 0% 0%;
+  width: 100%;
+}
+
+
+.golf_course_id {
+  color: #A19060;
+  font-size: 70px;
+}
+.golf_round_members_label {
+  color: #A19060;
+  font-size: 30px;
+  // margin: 10px;
+}
+#go {
+  right: 34px;
+  float: right;
+  top: 14px;
+  margin: 10px;
+  width: 84px;
+  height: 54px;
+  padding-top: 10px;
+  background: #80000A;
+  border-radius: 50%;
+  color: #A19060; 
+  font-size: 40px;
+  object-fit: cover;
+  text-align: center;
+}
+
+
+
+    //TODO REMOVE WEBCAM
+  #camera {
+    border: black 1px groove;
+  }
+  #snapshot {
+    height: 100%;
+    width: 100%;
+  }
+  .photo {
+    border-radius: 50%;
+    height: 75px;
+    width: 75px;
+  }
+    

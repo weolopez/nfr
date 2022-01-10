@@ -1,0 +1,20 @@
+<div class="example-container">
+  <div>
+    <mat-list-item>
+      <mat-icon (click)="open = (open!=='new') ? 'new' : ''" style="float: left">more_vert</mat-icon>
+      <label>New {{collection}}</label>
+      <!-- <mat-icon (click)="newMessage.value=''" style="float: right">delete</mat-icon> -->
+    </mat-list-item>
+    <textarea #newMessage (blur)="update(newMessage.value)" [hidden]="open!=='new'" class="source" matInput
+      placeholder="json"></textarea>
+  </div>
+  <div *ngFor="let message of collection | fire | async ; index as i">
+    <mat-list-item>
+      <mat-icon (click)="open = (open!==i) ? i : ''" style="float: left">more_vert</mat-icon>
+      <label>{{message.id}}</label>
+      <mat-icon (click)="delete(message.id)" style="float: right">delete</mat-icon>
+    </mat-list-item>
+    <textarea #messageInput (blur)="update(messageInput.value)" [hidden]="open!==i" class="source" matInput
+      [placeholder]="i" [value]="message | json"></textarea>
+  </div>
+</div>

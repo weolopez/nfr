@@ -1,0 +1,135 @@
+.team {
+  font-size: 25px !important;
+}
+h1,
+h2,
+h3 {
+  text-decoration: none;
+  margin: 0;
+}
+h4 { padding: 5px;}
+#snap {
+  background: #80000a;
+  color: #a19060;
+}
+.seatButton {
+  object-fit: cover;
+  border-radius: 50%;
+  float: left;
+  background: #80000a;
+  width: 55px;
+  height: 55px;
+}
+.gameRow {
+  height: auto;
+}
+header {
+  .gameHeader {
+    align-self: center;
+    width: 300px;
+  }
+  margin: 0 0 0 35px;
+  width: 600px;
+  padding: 0;
+  height: auto;
+}
+.game {
+  margin: 0 0 0 15px;
+  width: 300px;
+  justify-content: space-around;
+
+  h4 {
+    margin: 0;
+  }
+}
+
+.pieContainer {
+  height: 50px;
+  position: relative;
+}
+
+.pieBackground {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.5);
+}
+
+.pie {
+  transition: all 1s;
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  clip: rect(0px, 25px, 50px, 0px);
+}
+
+.hold {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  border-radius: 100%;
+  clip: rect(0px, 50px, 50px, 25px);
+}
+
+#pieSlice1 .pie {
+  transform: rotate(120deg);
+}
+
+#pieSlice3 {
+  transform: rotate(120deg);
+}
+
+#pieSlice3 .pie {
+  transform: rotate(120deg);
+}
+
+#pieSlice6 {
+  transform: rotate(240deg);
+}
+
+#pieSlice6 .pie {
+  transform: rotate(120deg);
+}
+
+.innerCircle {
+  position: absolute;
+  width: 40px;
+  height: 40px;
+  background-color: #444;
+  border-radius: 100%;
+  top: 5px;
+  left: 5px;
+  box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5) inset;
+  color: white;
+}
+.team-name {
+  margin-left: 15px;
+}
+
+#newSeason {
+  border: none;
+  color: white;
+  font-size: xx-large;
+  padding-top: 25px;
+  height: 50px; 
+  text-align: center;
+  width: 100%;
+}
+.scroll {
+  display: flex; /* [1] */
+  flex-wrap: nowrap; /* [1] */
+  overflow-x: auto; /* [2] */
+  -webkit-overflow-scrolling: touch; /* [3] */
+  -ms-overflow-style: -ms-autohiding-scrollbar; /* [4] */
+}
+
+/* [6] */
+.scroll::-webkit-scrollbar {
+  display: none;
+}
+.item {
+  flex: 0 1 auto;
+  margin: 10px;
+}
