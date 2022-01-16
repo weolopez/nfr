@@ -11,7 +11,7 @@ import { AuthService } from './services/auth.service';
 })
 export class AppComponent implements OnInit, OnDestroy {
   public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
+    { title: 'Season', url: '/season/Cabal22', icon: 'football' },
     { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
     { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
     { title: 'Archived', url: '/folder/Archived', icon: 'archive' },

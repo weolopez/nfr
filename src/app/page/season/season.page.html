@@ -1,0 +1,70 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{currentSeasonID}}</ion-title>
+    <ion-icon slot="end" name="create" (click)="edit()"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item (click)="showUsers=!showUsers">
+      <ion-label>Members</ion-label>
+      <!-- <ion-icon slot="start" name="person-circle"></ion-icon> -->
+      
+      <ion-avatar slot="start">
+        <img src="{{currentUser?.photoURL}}">
+      </ion-avatar>
+      <!-- <ion-icon slot="end" name="remove" (click)="addMember(member)"></ion-icon> -->
+    </ion-item>
+    <ion-list *ngIf="showUsers">
+      <div *ngFor="let user of users$ | async ">
+        <ion-item *ngIf="userIsInSeason(user)" (click)="switchUser(user)">
+          <ion-label>{{ user.displayName }}</ion-label>
+          <ion-avatar slot="start">
+            <img src="{{user.photoURL}}">
+            </ion-avatar>
+        </ion-item>
+      </div>
+    </ion-list>
+    <!--  -->
+    <ion-list *ngIf="games">
+      <ion-item *ngFor="let game of games ">
+        <ion-card>
+          <ion-item lines="none">
+            <ion-label>
+              <h1>{{ game.date }}</h1>
+            </ion-label>
+          </ion-item>
+          <ion-item>
+            <ion-label>
+              <h2>{{ game.home }} vs {{ game.away }}</h2>
+            </ion-label>
+          </ion-item>
+        </ion-card>
+        <ion-card>
+          <ion-item (click)="selectSeat(game, 'A')">
+            <ion-label>{{ (game.seatA) ? game.seatA : ' A' }}</ion-label>
+            <ion-icon slot='start' name="ticket-outline"></ion-icon>
+          </ion-item>
+          <ion-item (click)="selectSeat(game, 'B')">
+            <ion-label>{{ (game.seatB) ? game.seatB : 'B'}}</ion-label>
+            <ion-icon slot='start' name="ticket-outline"></ion-icon>
+          </ion-item>
+          <ion-item (click)="selectSeat(game, 'C')">
+            <ion-label>{{ (game.seatB) ? game.seatC : 'C'}}</ion-label>
+            <ion-icon slot='start' name="ticket-outline"></ion-icon>
+          </ion-item>
+        </ion-card>
+        <!-- <ion-avatar slot="start">
+              <img src="{{user.photoURL}}">
+            </ion-avatar> -->
+        <!-- <ion-icon slot="end" name="{{userIsInSeason(user, season.id)}}" (click)="toggleSeason(user, season.id)">
+            </ion-icon> -->
+      </ion-item>
+    </ion-list>
+
+  </ion-list>
+</ion-content>

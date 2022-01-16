@@ -12,6 +12,10 @@ const routes: Routes = [
     path: 'folder/:id',
     loadChildren: () => import('./folder/folder.module').then( m => m.FolderPageModule)
   },
+  {
+    path: 'season/:id',
+    loadChildren: () => import('./page/season/season.module').then( m => m.SeasonPageModule)
+  },
   // { path: 'seasons/:id',
   //   loadChildren: () => import('./page/season/season.module').then(m => m.SeasonModule),
   //   canActivate: [AuthGuard]

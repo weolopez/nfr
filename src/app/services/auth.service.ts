@@ -11,8 +11,7 @@ import { ThrowStmt } from '@angular/compiler';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  static users: any;
-  static usersArray: any;
+  users$: Observable<unknown[]>;
 
   switchUser(id: any) {
     this.manualUserId = id;
@@ -31,12 +30,13 @@ export class AuthService {
     private afs: AngularFirestore,
     private router: Router
   ) {
-    afs.collection('users').valueChanges().subscribe( (u:any)=>{
-      u.forEach( (user:any)=>{
-        AuthService.users[user.id] = user
-      })
-      AuthService.usersArray = u
-    })
+    this.users$ = afs.collection('users').valueChanges()
+    // .subscribe( (u:any)=>{
+    //   u.forEach( (user:any)=>{
+    //     AuthService.users[user.id] = user
+    //   })
+    //   AuthService.usersArray = u
+    // })
 
     this.user$ = authState(this.afAuth).pipe(
       switchMap(user => {
