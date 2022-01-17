@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { tap } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { AlertController } from '@ionic/angular';
 
@@ -23,6 +23,8 @@ export class SeasonPage implements OnInit {
   currentSeason: any;
   currentUser: any;
   games: any;
+  season: any;
+  seasonO: any;
 
   constructor(private activatedRoute: ActivatedRoute,
     public authService: AuthService,
@@ -44,9 +46,10 @@ export class SeasonPage implements OnInit {
 
   ngOnInit() {
     this.currentSeasonID = this.activatedRoute.snapshot.paramMap.get('id');
-    this.db.collection<Season>('seasons').doc(this.currentSeasonID).valueChanges().subscribe(
+    this.seasonO = this.db.collection<Season>('seasons').doc(this.currentSeasonID)
+    this.seasonO.valueChanges().subscribe(
       data => {
-        this.games = data.games;
+        this.season = data;
       })
   }
   switchUser(user) {
@@ -69,18 +72,11 @@ export class SeasonPage implements OnInit {
     this.users.doc(user.id).set(user);
   }
   selectSeat(game, seat) {
-    this.currentUser.seasons.find(s => {
-      if (s.id == this.currentSeasonID) {
-
-        if (!s.games) s.games = []
-        s.games.push( { id: game.id, seat: seat } )
-        alert(JSON.stringify(s)+ JSON.stringify(game));
-
-      } 
-    })
+    game[seat] = (game[seat]) ? null : {id: this.currentUser.id, name: this.currentUser.displayName};
+    this.seasonO.set(this.season);
+            
   }
   edit() {
     location.href = '/folder/seasons'
   }
-
 }

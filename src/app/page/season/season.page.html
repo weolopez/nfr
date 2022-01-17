@@ -30,8 +30,8 @@
       </div>
     </ion-list>
     <!--  -->
-    <ion-list *ngIf="games">
-      <ion-item *ngFor="let game of games ">
+    <ion-list *ngIf="season">
+      <ion-item *ngFor="let game of season.games ">
         <ion-card>
           <ion-item lines="none">
             <ion-label>
@@ -45,19 +45,20 @@
           </ion-item>
         </ion-card>
         <ion-card>
-          <ion-item (click)="selectSeat(game, 'A')">
-            <ion-label>{{ (game.seatA) ? game.seatA : ' A' }}</ion-label>
-            <ion-icon slot='start' name="ticket-outline"></ion-icon>
+          <ion-item (click)="selectSeat(game, 'seatA')">
+            <ion-label>{{ (game.seatA) ? game.seatA.name : ' A' }}</ion-label>
+            <ion-icon style="color:#A19060" slot='start' name="ticket"></ion-icon>
           </ion-item>
-          <ion-item (click)="selectSeat(game, 'B')">
-            <ion-label>{{ (game.seatB) ? game.seatB : 'B'}}</ion-label>
-            <ion-icon slot='start' name="ticket-outline"></ion-icon>
+          <ion-item (click)="selectSeat(game, 'seatB')">
+            <ion-label>{{ (game.seatB) ? game.seatB.name : 'B'}}</ion-label>
+            <ion-icon style="color:#A19060" slot='start' name="ticket"></ion-icon>
           </ion-item>
-          <ion-item (click)="selectSeat(game, 'C')">
-            <ion-label>{{ (game.seatB) ? game.seatC : 'C'}}</ion-label>
-            <ion-icon slot='start' name="ticket-outline"></ion-icon>
+          <ion-item (click)="selectSeat(game, 'seatC')">
+            <ion-label>{{ (game.seatC) ? game.seatC.name : 'C'}}</ion-label>
+            <ion-icon style="color:#A19060" slot='start' name="ticket"></ion-icon>
           </ion-item>
         </ion-card>
+
         <!-- <ion-avatar slot="start">
               <img src="{{user.photoURL}}">
             </ion-avatar> -->

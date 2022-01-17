@@ -2,6 +2,10 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
+        <ion-header>
+          <ion-title>WEO</ion-title>
+          <h1>The Cabal</h1>
+        </ion-header>
         <ion-list id="inbox-list" style="    padding-top: 0;">
 <div  *ngIf="userO | async as user; else showLogin">
           <ion-list-header>
@@ -22,7 +26,7 @@
             <ion-list-header>
               <ion-item (click)="loginWithGoogle()" lines="none">
                 <ion-icon name="log-in"></ion-icon>
-                <ion-label> Please login with Google </ion-label>
+                <ion-label>Google Login</ion-label>
               </ion-item>
             </ion-list-header>
           </ng-template>
