@@ -46,16 +46,19 @@
         </ion-card>
         <ion-card>
           <ion-item (click)="selectSeat(game, 'seatA')">
-            <ion-label>{{ (game.seatA) ? game.seatA.name : ' A' }}</ion-label>
-            <ion-icon style="color:#A19060" slot='start' name="ticket"></ion-icon>
+            <ion-label>{{ (game.seatA) ? game.seatA.name : ' A' }} </ion-label>
+            <ion-avatar *ngIf="game.seatA" slot="start"> <img src="{{getPictureFromID(game.seatA.id)}}"> </ion-avatar>
+            <ion-icon *ngIf="!game.seatA" style="color:#A19060" slot='start' name="ticket"></ion-icon>
           </ion-item>
           <ion-item (click)="selectSeat(game, 'seatB')">
             <ion-label>{{ (game.seatB) ? game.seatB.name : 'B'}}</ion-label>
-            <ion-icon style="color:#A19060" slot='start' name="ticket"></ion-icon>
+            <ion-avatar *ngIf="game.seatB" slot="start"> <img src="{{getPictureFromID(game.seatB.id)}}"> </ion-avatar>
+            <ion-icon *ngIf="!game.seatB" style="color:#A19060" slot='start' name="ticket"></ion-icon>
           </ion-item>
           <ion-item (click)="selectSeat(game, 'seatC')">
             <ion-label>{{ (game.seatC) ? game.seatC.name : 'C'}}</ion-label>
-            <ion-icon style="color:#A19060" slot='start' name="ticket"></ion-icon>
+            <ion-avatar *ngIf="game.seatC" slot="start"> <img src="{{getPictureFromID(game.seatC.id)}}"> </ion-avatar>
+            <ion-icon *ngIf="!game.seatC" style="color:#A19060" slot='start' name="ticket"></ion-icon>
           </ion-item>
         </ion-card>
 

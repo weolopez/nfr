@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFirestore, AngularFirestoreCollection, AngularFirestoreDocument } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { map, tap, filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { AlertController } from '@ionic/angular';
 
@@ -15,16 +15,16 @@ export interface Season { id: string;  games?: any}
 })
 export class SeasonPage implements OnInit {
   selectedData: any;
-  usersArray: any;
+  usersArray=[];
   users$: Observable<unknown[]>;
   users: AngularFirestoreCollection<any>;
-  usersO: any;
   currentSeasonID: string;
   currentSeason: any;
   currentUser: any;
   games: any;
   season: any;
   seasonO: any;
+  usersO: Observable<any[]>;
 
   constructor(private activatedRoute: ActivatedRoute,
     public authService: AuthService,
@@ -34,6 +34,8 @@ export class SeasonPage implements OnInit {
 
     this.users = db.collection<Season>('users');
     this.usersO = this.users.valueChanges();
+    //get all users from usersO
+    this.usersO.pipe(tap((u:any)=>this.usersArray=u)).subscribe()
 
     // .pipe( tap(data=>console.log(data)) );
     this.users$ = authService.users$;
@@ -44,6 +46,9 @@ export class SeasonPage implements OnInit {
 
   }
 
+  getPictureFromID(id) {
+    return this.usersArray.filter(u=>u.id==id)[0].photoURL
+  }
   ngOnInit() {
     this.currentSeasonID = this.activatedRoute.snapshot.paramMap.get('id');
     this.seasonO = this.db.collection<Season>('seasons').doc(this.currentSeasonID)
