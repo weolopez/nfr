@@ -26,3 +26,14 @@ ion-menu-button {
 #container a {
   text-decoration: none;
 }
+ 
+.toolbar-container {
+  background: repeating-linear-gradient(
+          to right,
+          #80000a,
+          #80000a 20%,
+          black 20%,
+          black 40%
+        ) !important;
+        ;color:#a19060;
+}

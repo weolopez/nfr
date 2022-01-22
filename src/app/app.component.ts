@@ -12,13 +12,13 @@ import { AuthService } from './services/auth.service';
 export class AppComponent implements OnInit, OnDestroy {
   public appPages = [
     { title: 'Season', url: '/season/Cabal22', icon: 'football' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Seasons', url: '/folder/Seasons', icon: 'warning' },
+    // { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
+    // { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
+    // { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
+    // { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
+    { title: 'Seasons', url: '/folder/Seasons', icon: 'list' },
   ];
-  public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
+  public labels = []// ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
 
   public loggedIn = false;
   public showProviders = false;
