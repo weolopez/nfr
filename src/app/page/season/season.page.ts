@@ -4,7 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map, tap, filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
-import { AlertController } from '@ionic/angular';
+import { AlertController, Platform } from '@ionic/angular';
 
 export interface Season { id: string;  games?: any}
 
@@ -25,12 +25,16 @@ export class SeasonPage implements OnInit {
   season: any;
   seasonO: any;
   usersO: Observable<any[]>;
+  isAdmin: boolean;
+  devWidth: number;
 
   constructor(private activatedRoute: ActivatedRoute,
     public authService: AuthService,
     public alertController: AlertController,
-    public db: AngularFirestore) {
+    public db: AngularFirestore,
+    public platform: Platform) {
 
+    this.devWidth = this.platform.width();
 
     this.users = db.collection<Season>('users');
     this.usersO = this.users.valueChanges();
@@ -41,7 +45,7 @@ export class SeasonPage implements OnInit {
     this.users$ = authService.users$;
     
     authService.getUser().subscribe(user => {
-      this.currentUser = user;
+      this.isAdmin = (user.displayName =='Mauricio Lopez');
     })
 
   }
@@ -83,5 +87,14 @@ export class SeasonPage implements OnInit {
   }
   edit() {
     location.href = '/folder/seasons'
+  }
+  shuffle() {
+
+  }
+  save() {
+
+  }
+  refresh() {
+
   }
 }

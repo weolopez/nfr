@@ -27,13 +27,19 @@ ion-menu-button {
   text-decoration: none;
 }
  
-.toolbar-container {
-  background: repeating-linear-gradient(
-          to right,
-          #80000a,
-          #80000a 20%,
-          black 20%,
-          black 40%
-        ) !important;
-        ;color:#a19060;
+// .toolbar-container {
+//   background: repeating-linear-gradient(
+//           to right,
+//           #80000a,
+//           #80000a 20%,
+//           black 20%,
+//           black 40%
+//         ) !important;
+//         ;color:#a19060;
+// }
+.selectedUser {
+  width:40% !important;  
+  height : 40% !important;  
+  max-width: 40px !important;  //any size
+  max-height: 40px !important;
 }

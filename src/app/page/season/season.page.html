@@ -1,73 +1,84 @@
 <ion-header [translucent]="true">
-  <ion-toolbar >
+  <ion-toolbar>
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
     <ion-title>{{currentSeasonID}}</ion-title>
-    <ion-icon slot="end" name="create" (click)="edit()"></ion-icon>
+    <ion-avatar *ngIf="currentUser" class="selectedUser" slot="end" (click)="showUsers=!showUsers">
+      <img src="{{currentUser?.photoURL}}">
+    </ion-avatar>
+    <ion-icon *ngIf="!currentUser" name="person-circle" (click)="showUsers=!showUsers && isAdmin" slot="end" ></ion-icon>
+    <ion-icon name="airplane" (click)="showAway=!showAway" slot="end" ></ion-icon>
+    <ion-icon name="create" (click)="edit()" slot="end" ></ion-icon>
+    
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-list>
-    <ion-item (click)="showUsers=!showUsers">
-      <ion-label>Members</ion-label>
-      <!-- <ion-icon slot="start" name="person-circle"></ion-icon> -->
-      
-      <ion-avatar slot="start">
-        <img src="{{currentUser?.photoURL}}">
-      </ion-avatar>
-      <!-- <ion-icon slot="end" name="remove" (click)="addMember(member)"></ion-icon> -->
-    </ion-item>
     <ion-list *ngIf="showUsers">
+      <ion-item style="--padding-start: 0;">
+        <ion-toolbar>
+          <ion-title>Members</ion-title>
+          <ion-icon name="shuffle" (click)="shuffle()" slot="end" ></ion-icon>
+          <ion-icon name="refresh-circle" (click)="refresh()" slot="end" ></ion-icon>
+          <ion-icon name="save" (click)="save()" slot="start" ></ion-icon>
+        </ion-toolbar>
+      </ion-item>
       <div *ngFor="let user of users$ | async ">
         <ion-item *ngIf="userIsInSeason(user)" (click)="switchUser(user)">
           <ion-label>{{ user.displayName }}</ion-label>
           <ion-avatar slot="start">
             <img src="{{user.photoURL}}">
-            </ion-avatar>
+          </ion-avatar>
         </ion-item>
       </div>
     </ion-list>
     <!--  -->
     <ion-list *ngIf="season">
-      <ion-item *ngFor="let game of season.games ">
-        <ion-card>
-          <ion-item lines="none">
-            <ion-label>
-              <h1>{{ game.date }}</h1>
-            </ion-label>
-          </ion-item>
-          <ion-item>
-            <ion-label>
-              <h2>{{ game.home }} vs {{ game.away }}</h2>
-            </ion-label>
-          </ion-item>
-        </ion-card>
-        <ion-card>
-          <ion-item (click)="selectSeat(game, 'seatA')">
-            <ion-label>{{ (game.seatA) ? game.seatA.name : ' A' }} </ion-label>
-            <ion-avatar *ngIf="game.seatA" slot="start"> <img src="{{getPictureFromID(game.seatA.id)}}"> </ion-avatar>
-            <ion-icon *ngIf="!game.seatA" style="color:#A19060" slot='start' name="ticket"></ion-icon>
-          </ion-item>
-          <ion-item (click)="selectSeat(game, 'seatB')">
-            <ion-label>{{ (game.seatB) ? game.seatB.name : 'B'}}</ion-label>
-            <ion-avatar *ngIf="game.seatB" slot="start"> <img src="{{getPictureFromID(game.seatB.id)}}"> </ion-avatar>
-            <ion-icon *ngIf="!game.seatB" style="color:#A19060" slot='start' name="ticket"></ion-icon>
-          </ion-item>
-          <ion-item (click)="selectSeat(game, 'seatC')">
-            <ion-label>{{ (game.seatC) ? game.seatC.name : 'C'}}</ion-label>
-            <ion-avatar *ngIf="game.seatC" slot="start"> <img src="{{getPictureFromID(game.seatC.id)}}"> </ion-avatar>
-            <ion-icon *ngIf="!game.seatC" style="color:#A19060" slot='start' name="ticket"></ion-icon>
-          </ion-item>
-        </ion-card>
+      <div *ngFor="let game of season.games ">
+        <ion-item *ngIf="game.home=='ATL' || showAway">
+          <ion-card>
+            <ion-item lines="none">
+              <ion-label>
+                <h1>{{ game.date }}</h1>
+              </ion-label>
+            </ion-item>
+            <ion-item>
+              <ion-label>
+                <h2>{{ game.home }} vs {{ game.away }}</h2>
+              </ion-label>
+            </ion-item>
+          </ion-card>
+          <ion-card>
+            <ion-item (click)="selectSeat(game, 'seatA')">
+              <ion-label> A </ion-label>
+              <ion-label [hidden]="devWidth < 576" *ngIf="game.seatA">{{ game.seatA.name }} </ion-label>
+              <ion-avatar *ngIf="game.seatA" slot="start"> <img src="{{getPictureFromID(game.seatA.id)}}"> </ion-avatar>
+              <ion-icon *ngIf="!game.seatA" style="color:#A19060" slot='start' name="ticket"></ion-icon>
+            </ion-item>
+            <ion-item (click)="selectSeat(game, 'seatB')">
+              <ion-label> B </ion-label>
+              <ion-label [hidden]="devWidth < 576" *ngIf="game.seatB">{{ game.seatB.name }} </ion-label>
+              <ion-avatar *ngIf="game.seatB" slot="start"> <img src="{{getPictureFromID(game.seatB.id)}}"> </ion-avatar>
+              <ion-icon *ngIf="!game.seatB" style="color:#A19060" slot='start' name="ticket"></ion-icon>
+            </ion-item>
+            <ion-item (click)="selectSeat(game, 'seatC')">
+              <ion-label> C </ion-label>
+              <ion-label [hidden]="devWidth < 576" *ngIf="game.seatC">{{ game.seatC.name }} </ion-label>
+              <ion-avatar *ngIf="game.seatC" slot="start"> <img src="{{getPictureFromID(game.seatC.id)}}"> </ion-avatar>
+              <ion-icon *ngIf="!game.seatC" style="color:#A19060" slot='start' name="ticket"></ion-icon>
+            </ion-item>
+          </ion-card>
 
-        <!-- <ion-avatar slot="start">
+          <!-- <ion-avatar slot="start">
               <img src="{{user.photoURL}}">
             </ion-avatar> -->
-        <!-- <ion-icon slot="end" name="{{userIsInSeason(user, season.id)}}" (click)="toggleSeason(user, season.id)">
+          <!-- <ion-icon slot="end" name="{{userIsInSeason(user, season.id)}}" (click)="toggleSeason(user, season.id)">
             </ion-icon> -->
-      </ion-item>
+        </ion-item>
+
+      </div>
     </ion-list>
 
   </ion-list>
