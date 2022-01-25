@@ -19,13 +19,13 @@
     <ion-list *ngIf="showUsers">
       <ion-item style="--padding-start: 0;">
         <ion-toolbar>
-          <ion-title>Members</ion-title>
+          <ion-title id="member-title">Members</ion-title>
           <ion-icon name="shuffle" (click)="shuffle()" slot="end" ></ion-icon>
           <ion-icon name="refresh-circle" (click)="refresh()" slot="end" ></ion-icon>
           <ion-icon name="save" (click)="save()" slot="start" ></ion-icon>
         </ion-toolbar>
       </ion-item>
-      <div *ngFor="let user of users$ | async ">
+      <div *ngFor="let user of users$ | async | sort:currentSeasonID">
         <ion-item *ngIf="userIsInSeason(user)" (click)="switchUser(user)">
           <ion-label>{{ user.displayName }}</ion-label>
           <ion-avatar slot="start">

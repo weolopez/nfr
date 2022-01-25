@@ -10,6 +10,7 @@ import { Season, SeasonPage } from './season.page';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { environment } from '../../../environments/environment';
+import { SortPipe } from 'src/app/services/sort.pipe';
 
 @NgModule({
   imports: [
@@ -21,6 +22,6 @@ import { environment } from '../../../environments/environment';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule.enablePersistence(),
   ],
-  declarations: [SeasonPage]
+  declarations: [SeasonPage, SortPipe]
 })
 export class SeasonPageModule {}

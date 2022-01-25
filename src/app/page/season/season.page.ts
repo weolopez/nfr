@@ -5,8 +5,9 @@ import { Observable } from 'rxjs';
 import { map, tap, filter } from 'rxjs/operators';
 import { AuthService } from '../../services/auth.service';
 import { AlertController, Platform } from '@ionic/angular';
+import { collection } from 'firebase/firestore';
 
-export interface Season { id: string;  games?: any}
+export interface Season { id: string; games?: any }
 
 @Component({
   selector: 'app-season',
@@ -15,7 +16,7 @@ export interface Season { id: string;  games?: any}
 })
 export class SeasonPage implements OnInit {
   selectedData: any;
-  usersArray=[];
+  usersArray = [];
   users$: Observable<unknown[]>;
   users: AngularFirestoreCollection<any>;
   currentSeasonID: string;
@@ -39,19 +40,19 @@ export class SeasonPage implements OnInit {
     this.users = db.collection<Season>('users');
     this.usersO = this.users.valueChanges();
     //get all users from usersO
-    this.usersO.pipe(tap((u:any)=>this.usersArray=u)).subscribe()
+    this.usersO.pipe(tap((u: any) => this.usersArray = u)).subscribe()
 
     // .pipe( tap(data=>console.log(data)) );
     this.users$ = authService.users$;
-    
+
     authService.getUser().subscribe(user => {
-      this.isAdmin = (user.displayName =='Mauricio Lopez');
+      this.isAdmin = (user.displayName == 'Mauricio Lopez');
     })
 
   }
 
   getPictureFromID(id) {
-    return this.usersArray.filter(u=>u.id==id)[0].photoURL
+    return this.usersArray.filter(u => u.id == id)[0].photoURL
   }
   ngOnInit() {
     this.currentSeasonID = this.activatedRoute.snapshot.paramMap.get('id');
@@ -81,20 +82,45 @@ export class SeasonPage implements OnInit {
     this.users.doc(user.id).set(user);
   }
   selectSeat(game, seat) {
-    game[seat] = (game[seat]) ? null : {id: this.currentUser.id, name: this.currentUser.displayName};
+    // alert(seat)
+    game[seat] = (game[seat]) ? null : { id: this.currentUser.id, name: this.currentUser.displayName };
     this.seasonO.set(this.season);
-            
   }
   edit() {
     location.href = '/folder/seasons'
   }
   shuffle() {
+    
+    alert("SHUFFLING")
+    const inOrder = [0, 1, 2, 3, 4, 5]
+    const shuffled = inOrder.sort(() => 0.5 - Math.random());
+    // alert(shuffled)
+    this.users.get().subscribe((querySnapshot) => {
+      querySnapshot.forEach((data: any) => {
+        const user = data.data()
+        const s = user.seasons?.find(s => s.id == this.currentSeasonID);
+        if (s) {
+          s.order = inOrder.pop()
+          this.users.doc(user.id).set(user);
+        }
+      });
+    })
 
   }
   save() {
-
+    this.season.games.forEach(g => {
+      if (g.seatA) g.seatA = null;
+      if (g.seatB) g.seatB = null;
+      if (g.seatC) g.seatC = null;
+    })
   }
+  
   refresh() {
-
+    this.season.games.map(g => {
+      if (g.seatA) g.seatA = null;
+      if (g.seatB) g.seatB = null;
+      if (g.seatC) g.seatC = null;
+    })
+    this.seasonO.set(this.season);
   }
 }
