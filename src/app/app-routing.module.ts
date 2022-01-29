@@ -5,7 +5,7 @@ import { AuthGuard } from './services/auth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'folder/Inbox',
+    redirectTo: 'season/Cabal22',
     pathMatch: 'full'
   },
   {

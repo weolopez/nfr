@@ -69,19 +69,8 @@ export class SeasonPage implements OnInit {
     const s = user.seasons?.find(s => s.id == this.currentSeasonID);
     return (s);
   }
-  toggleSeason(user) {
-    // console.log(user);
-    const s = user.seasons?.find(s => s.id == this.currentSeasonID);
-    if (s) {
-      user.seasons = user.seasons.filter(s => s.id != this.currentSeasonID);
-    } else {
-      if (!user.seasons)
-        user.seasons = [];
-      user.seasons.push({ id: this.currentSeasonID, games: [], seats: [] });
-    }
-    this.users.doc(user.id).set(user);
-  }
   selectSeat(game, seat) {
+    if (!this.isAdmin) return;
     // alert(seat)
     game[seat] = (game[seat]) ? null : { id: this.currentUser.id, name: this.currentUser.displayName };
     this.seasonO.set(this.season);
