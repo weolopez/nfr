@@ -60,6 +60,7 @@ export class SeasonPage implements OnInit {
     this.seasonO.valueChanges().subscribe(
       data => {
         this.season = data;
+        console.log(data)
       })
   }
   switchUser(user) {

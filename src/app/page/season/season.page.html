@@ -38,7 +38,7 @@
     <ion-list *ngIf="season">
       <div *ngFor="let game of season.games ">
         <ion-item *ngIf="game.home=='ATL' || showAway">
-          <ion-card>
+          <ion-card style="width: 50%;">
             <ion-item lines="none">
               <ion-label>
                 <h1>{{ game.date }}</h1>
@@ -50,21 +50,21 @@
               </ion-label>
             </ion-item>
           </ion-card>
-          <ion-card>
+          <ion-card style="width: 50%;">
             <ion-item (click)="selectSeat(game, 'seatA')">
-              <ion-label> A </ion-label>
+              <ion-label style="flex: unset;margin-right: 20px;"> A </ion-label>
               <ion-label [hidden]="devWidth < 576" *ngIf="game.seatA">{{ game.seatA.name }} </ion-label>
               <ion-avatar *ngIf="game.seatA" slot="start"> <img src="{{getPictureFromID(game.seatA.id)}}"> </ion-avatar>
               <ion-icon *ngIf="!game.seatA" style="color:#A19060" slot='start' name="ticket"></ion-icon>
             </ion-item>
             <ion-item (click)="selectSeat(game, 'seatB')">
-              <ion-label> B </ion-label>
+              <ion-label style="flex: unset;margin-right: 20px;"> B </ion-label>
               <ion-label [hidden]="devWidth < 576" *ngIf="game.seatB">{{ game.seatB.name }} </ion-label>
               <ion-avatar *ngIf="game.seatB" slot="start"> <img src="{{getPictureFromID(game.seatB.id)}}"> </ion-avatar>
               <ion-icon *ngIf="!game.seatB" style="color:#A19060" slot='start' name="ticket"></ion-icon>
             </ion-item>
             <ion-item (click)="selectSeat(game, 'seatC')">
-              <ion-label> C </ion-label>
+              <ion-label style="flex: unset;margin-right: 20px;"> C </ion-label>
               <ion-label [hidden]="devWidth < 576" *ngIf="game.seatC">{{ game.seatC.name }} </ion-label>
               <ion-avatar *ngIf="game.seatC" slot="start"> <img src="{{getPictureFromID(game.seatC.id)}}"> </ion-avatar>
               <ion-icon *ngIf="!game.seatC" style="color:#A19060" slot='start' name="ticket"></ion-icon>
