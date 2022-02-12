@@ -10,6 +10,7 @@ import { AuthService } from './services/auth.service';
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
+  public user: any
   public appPages = [
     { title: 'Cabal22', url: '/season/Cabal22', icon: 'football' },
     // { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
@@ -30,7 +31,7 @@ export class AppComponent implements OnInit, OnDestroy {
     showLoginButton = false;
     showLogoutButton = false;
   
-    constructor(@Optional() private auth: Auth
+    constructor(@Optional() public auth: Auth
     , private router: Router
     , authService: AuthService) {
       if (auth) {

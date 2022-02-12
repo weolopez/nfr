@@ -29,6 +29,9 @@ export class SeasonPage implements OnInit {
   isAdmin: boolean;
   devWidth: number;
 
+  public showUsers: boolean;
+  public showAway: boolean;
+  
   constructor(private activatedRoute: ActivatedRoute,
     public authService: AuthService,
     public alertController: AlertController,

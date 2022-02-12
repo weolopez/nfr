@@ -25,9 +25,9 @@
         </ion-item>
         <div *ngIf="season.showUsers">
           <ion-item *ngFor="let user of users$ | async ">
-            <ion-label>{{ user.displayName }}</ion-label>
+            <!-- <ion-label>{{ user.displayName }}</ion-label> -->
             <ion-avatar slot="start">
-              <img src="{{user.photoURL}}">
+              <!-- <img src="{{user.photoURL}}"> -->
             </ion-avatar>
             <ion-icon slot="end" name="{{userIsInSeason(user, season.id)}}" (click)="toggleSeason(user, season.id)">
             </ion-icon>

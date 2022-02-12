@@ -15,6 +15,9 @@ export interface Season { id: string;  games?: any}@Component({
   styleUrls: ['./folder.page.scss'],
 })
 export class FolderPage implements OnInit {
+
+  public user: any;
+  
   [x: string]: any;
   public folder: string
   selectedData: any
